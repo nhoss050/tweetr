@@ -2,7 +2,7 @@
  * Client-side JS logic goes here
  * jQuery is already loaded
  * Reminder: Use (and do all your DOM work in) jQuery's document ready function
- */
+
 var data = [
   {
     "user": {
@@ -49,14 +49,34 @@ var data = [
     "created_at": 1461113796368
   }
 ];
-
+*/
 $(document).ready(function() {
 
 
-function renderTweets(tweets) {
+
+
+function loadTweets(){
+
+  $.ajax({
+        url: 'http://localhost:8080/tweets',
+        method: 'GET',
+      }).then(function (res) {
+        // tell the user that the server successfully added this image to their "liked images"
+       // console.log('Successfully added ' + res);
+        renderTweets(res);
+        //console.log(res)
+      }).fail(function (err) {
+        console.log(err);
+        alert('failed');
+      });
+
+  }
+
+
+function renderTweets(receivedTweets) {
   // loops through tweets
-  for (eachuser of tweets){
-    $(".articlecont").append(createTweetElement(eachuser));
+  for (eachuser of receivedTweets) {
+    $(".articlecont").prepend(createTweetElement(eachuser));
   }
 
     // takes return value and appends it to the tweets container
@@ -68,7 +88,7 @@ function createTweetElement(userData) {
 var firstDate = new Date(userData.created_at)
 var secondDate = new Date();
 var diffrence = secondDate -firstDate;
-console.log(millisToDaysHoursMinutes(diffrence))
+// console.log(millisToDaysHoursMinutes(diffrence))
 //const datedif = Math.round(Math.abs((firstDate.getTime() - secondDate.getTime())/(oneDay)));
 
 var $tweet = $("<article>").addClass("tweet");
@@ -114,7 +134,72 @@ function millisToDaysHoursMinutes(millis) {
 
 //var $tweet = createTweetElement(tweetData);
 
-renderTweets(data);
+loadTweets();
+
+//Ajax receiving submit
+
+var $form = $('#target');
+console.log($form);
+
+
+$form.on("submit",function(event) {
+event.preventDefault();
+  var $inputTweet = $('#text').val();
+  //console.log("the length of the counter is :", parseInt($('.counter').text(), 10))
+  console.log("input is:",$inputTweet);
+
+  if(!($inputTweet.length == 0)){
+
+    if(parseInt($('.counter').text(), 10)>=0){
+      $.ajax({
+          method: 'POST',
+          url: 'http://localhost:8080/tweets',
+          data: $(this).serialize(),
+
+      }).then(function (res) {
+        // tell the user that the server successfully added this image to their "liked images"
+        //alert('Successfully added ' + res);
+      }).fail(function (err) {
+        console.log(err);
+        alert('failed');
+      });
+//----------- Get in the listener--------------------
+      $.ajax({
+        url: 'http://localhost:8080/tweets',
+        method: 'GET',
+      }).then(function (res) {
+        // tell the user that the server successfully added this image to their "liked images"
+       // console.log('Successfully added ' + res);
+        $(".articlecont").empty();
+        renderTweets(res);
+        //console.log(res)
+      }).fail(function (err) {
+        console.log(err);
+        alert('failed');
+      });
+
+
+
+
+
+
+
+
+
+    } else {
+      alert('you have exceeded the max char allowed')
+    }
+  } else {
+    alert('you need to enter something!')
+  }
+
+
+
+
+});
+
+
+
   });
 
 
