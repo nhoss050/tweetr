@@ -1,0 +1,100 @@
+.new-tweet {
+    margin: 0 2em;
+    background-color: lightgray;
+    border-radius: 6px;
+    padding: 0.5em;
+    overflow: auto;
+}
+
+textarea {
+    width: 100%;
+    margin-top: 20px;
+}
+
+input{
+    float: left;
+}
+
+.new-tweet h2{
+    margin: 0;
+    border-bottom: thick solid;
+}
+.new-tweet span {
+
+  float:right;
+}
+
+.tweet {
+
+    margin: 2em 2em;
+    border: 1px solid black;
+    border-radius: 6px;
+    overflow: auto;
+
+}
+
+.tweet header {
+    background-color: lightgray;
+    border-radius: 6px 0 0 0;
+    padding: 0.5em;;
+    overflow: auto;
+}
+
+#header-span {
+  float: right;
+}
+
+
+
+.tweet-body {
+    width: 100%;
+    border: 1px solid black;
+}
+
+.tweet img {
+    float: left;
+}
+
+.Days-counter{
+    float: left;
+}
+
+.tweet p{
+
+    height:30px;
+    padding: 2em 2em;
+
+}
+
+article {
+    opacity: 0.5;
+}
+
+footer i {
+    float: right;
+    opacity: 0;
+}
+
+article:hover {
+    opacity: 1;
+}
+
+article:hover footer i {
+    opacity: 1;
+}
+
+footer span {
+    font-size: 80%;
+    float:left;
+}
+
+.tweet footer {
+    overflow: : auto;
+    border-top: solid;
+}
+
+
+.tweet h2{
+    float: left;
+    margin: 0;
+}
