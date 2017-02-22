@@ -29,7 +29,7 @@ var data = [
       },
       "handle": "@rd" },
     "content": {
-      "text": "Je pense , donc je suis"
+      "text": "<script>alert('uh oh!');</script>"
     },
     "created_at": 1461113959088
   },
@@ -65,25 +65,53 @@ function renderTweets(tweets) {
 
 function createTweetElement(userData) {
 
+var firstDate = new Date(userData.created_at)
+var secondDate = new Date();
+var diffrence = secondDate -firstDate;
+console.log(millisToDaysHoursMinutes(diffrence))
+//const datedif = Math.round(Math.abs((firstDate.getTime() - secondDate.getTime())/(oneDay)));
+
 var $tweet = $("<article>").addClass("tweet");
 const $header = $('<header>');
 const $username = $('<h2>').text(userData.user.name);
 const $avatar = $('<img>').attr('src', userData.user.avatars.small);
 const $span1 = $('<span>').text(userData.user.handle);
-const $span2 = $('<span>').text(userData.created_at);
+const $span2 = $('<span>').text(millisToDaysHoursMinutes(diffrence));
 const $footer = $('<footer>');
-const $main = $("<p>").text(userData.content.text);
+const $main = $(`<p>${escape(userData.content.text)}<p>`);
 const $iconsheart = $("<i>").addClass("fa").addClass("fa-heartbeat").attr("aria-hidden",true);
 const $iconsretweet = $("<i>").addClass("fa").addClass("fa-retweet").attr("aria-hidden",true);
 const $iconsflag = $("<i>").addClass("fa").addClass("fa-flag").attr("aria-hidden",true);
 $tweet.append($header);
 $tweet.append($main);
 $tweet.append($footer);
-
+// escape(userData.content.text)
 $header.append($avatar,$username, $span1);
 $footer.append($span2,$iconsheart,$iconsretweet,$iconsflag);
 return $tweet;
 }
+
+function escape(str) {
+  var div = document.createElement('div');
+  div.appendChild(document.createTextNode(str));
+  return div.innerHTML;
+
+}
+
+function millisToDaysHoursMinutes(millis) {
+    var seconds = millis / 1000;
+    var totalMinutes = seconds / 60;
+
+    var days = totalMinutes / 1440;
+    totalMinutes -= 1440 * days;
+    var hours = totalMinutes / 60;
+    totalMinutes -= hours * 60;
+    days = Math.round(days);
+
+    return (days) + "dayes, " + Math.round(hours) + "hours ago!"  ;
+}
+
+
 //var $tweet = createTweetElement(tweetData);
 
 renderTweets(data);
