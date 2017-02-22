@@ -40,7 +40,7 @@ input{
     overflow: auto;
 }
 
-#header-span {
+header span {
   float: right;
 }
 
