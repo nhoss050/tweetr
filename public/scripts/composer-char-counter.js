@@ -14,6 +14,8 @@ $( document ).ready(function() {
       $('.new-tweet .counter').css('color', 'red');
       $('.new-tweet .counter').text(max - sentenceSize);
     }
+
+
  });
 
 

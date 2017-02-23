@@ -1,55 +1,3 @@
-/*
- * Client-side JS logic goes here
- * jQuery is already loaded
- * Reminder: Use (and do all your DOM work in) jQuery's document ready function
-
-var data = [
-  {
-    "user": {
-      "name": "Newton",
-      "avatars": {
-        "small":   "https://vanillicon.com/788e533873e80d2002fa14e1412b4188_50.png",
-        "regular": "https://vanillicon.com/788e533873e80d2002fa14e1412b4188.png",
-        "large":   "https://vanillicon.com/788e533873e80d2002fa14e1412b4188_200.png"
-      },
-      "handle": "@SirIsaac"
-    },
-    "content": {
-      "text": "If I have seen further it is by standing on the shoulders of giants"
-    },
-    "created_at": 1461116232227
-  },
-  {
-    "user": {
-      "name": "Descartes",
-      "avatars": {
-        "small":   "https://vanillicon.com/7b89b0d8280b93e2ba68841436c0bebc_50.png",
-        "regular": "https://vanillicon.com/7b89b0d8280b93e2ba68841436c0bebc.png",
-        "large":   "https://vanillicon.com/7b89b0d8280b93e2ba68841436c0bebc_200.png"
-      },
-      "handle": "@rd" },
-    "content": {
-      "text": "<script>alert('uh oh!');</script>"
-    },
-    "created_at": 1461113959088
-  },
-  {
-    "user": {
-      "name": "Johann von Goethe",
-      "avatars": {
-        "small":   "https://vanillicon.com/d55cf8e18b47d4baaf60c006a0de39e1_50.png",
-        "regular": "https://vanillicon.com/d55cf8e18b47d4baaf60c006a0de39e1.png",
-        "large":   "https://vanillicon.com/d55cf8e18b47d4baaf60c006a0de39e1_200.png"
-      },
-      "handle": "@johann49"
-    },
-    "content": {
-      "text": "Es ist nichts schrecklicher als eine tätige Unwissenheit."
-    },
-    "created_at": 1461113796368
-  }
-];
-*/
 $(document).ready(function() {
 
 
@@ -97,7 +45,8 @@ const $avatar = $('<img>').attr('src', userData.user.avatars.small);
 const $span1 = $('<span>').text(userData.user.handle);
 const $span2 = $('<span>').text(millisToDaysHoursMinutes(diffrence));
 const $footer = $('<footer>');
-const $main = $(`<p>${escape(userData.content.text)}<p>`);
+//const $main = $(`<p>${escape(userData.content.text)}<p>`);
+const $main = $('<p>').text(userData.content.text);
 const $iconsheart = $("<i>").addClass("fa").addClass("fa-heartbeat").attr("aria-hidden",true);
 const $iconsretweet = $("<i>").addClass("fa").addClass("fa-retweet").attr("aria-hidden",true);
 const $iconsflag = $("<i>").addClass("fa").addClass("fa-flag").attr("aria-hidden",true);
@@ -127,7 +76,7 @@ function millisToDaysHoursMinutes(millis) {
     totalMinutes -= hours * 60;
     days = Math.round(days);
 
-    return (days) + "dayes, " + Math.round(hours) + "hours ago!"  ;
+    return (days) + "dayes ago ";
 }
 
 
@@ -142,12 +91,13 @@ console.log($form);
 
 
 $form.on("submit",function(event) {
-event.preventDefault();
+  event.preventDefault();
   var $inputTweet = $('#text').val();
   //console.log("the length of the counter is :", parseInt($('.counter').text(), 10))
   console.log("input is:",$inputTweet);
 
-  if(!($inputTweet.length == 0)){
+
+  if(!($inputTweet.trim().length == 0)){
 
     if(parseInt($('.counter').text(), 10)>=0){
       $.ajax({
@@ -179,15 +129,15 @@ event.preventDefault();
 
 
     } else {
-      alert('you have exceeded the max char allowed')
+      alert('Exceeded the Maximum characters allowed')
     }
   } else {
-    alert('you need to enter something!')
+    alert('Please enter something!')
   }
 
 
-
-
+$('#text').val('');
+$('.new-tweet .counter').text('140').css('color', 'black');
 });
 
   var $button = $('#compose-button');
