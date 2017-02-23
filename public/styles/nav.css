@@ -22,3 +22,44 @@
     width: 80px;
     float: left;
 }
+
+#nav-bar .nav-buttons {
+    float: right;
+    list-style-type: none;
+    margin: 7px;
+    overflow: auto;
+    }
+.nav-buttons button{
+    padding: 15px;
+    background-color: #fcffff;
+    border: 1px solid #666;
+    border-radius: 11px;
+    width: 8em;
+    height: 2m;
+    height: 4em;
+    overflow: auto;
+    opacity: 0.6;
+    box-shadow: 0px 5px 0px #00823F;
+
+}
+.nav-buttons button:hover{
+opacity: 1;
+
+}
+
+.nav-buttons button:active {
+  box-shadow: 0 3px 0 #000502;
+  top: 3px;
+}
+
+.nav-buttons span {
+color: #00a087;
+float: right;
+font-size: 130%
+}
+.nav-buttons .fa-pencil-square-o {
+float: left;
+color: #00a087;
+size: 230%
+}
+

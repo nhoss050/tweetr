@@ -54,7 +54,6 @@ $(document).ready(function() {
 
 
 
-
 function loadTweets(){
 
   $.ajax({
@@ -179,13 +178,6 @@ event.preventDefault();
       });
 
 
-
-
-
-
-
-
-
     } else {
       alert('you have exceeded the max char allowed')
     }
@@ -198,8 +190,13 @@ event.preventDefault();
 
 });
 
-
-
+  var $button = $('#compose-button');
+    $button.on('click', function () {
+      console.log("button pressed")
+      $( ".new-tweet" ).slideToggle();
+      $('#text').select();
   });
+
+});
 
 
