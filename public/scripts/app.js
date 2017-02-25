@@ -11,6 +11,11 @@ function loadTweets(){
         // tell the user that the server successfully added this image to their "liked images"
        // console.log('Successfully added ' + res);
         renderTweets(res);
+        // $(".tweet").on('click', function(event)
+        // {
+        // console.log('nima you got it!')
+        // });
+
         //console.log(res)
       }).fail(function (err) {
         console.log(err);
@@ -38,7 +43,7 @@ var diffrence = secondDate -firstDate;
 // console.log(millisToDaysHoursMinutes(diffrence))
 //const datedif = Math.round(Math.abs((firstDate.getTime() - secondDate.getTime())/(oneDay)));
 
-var $tweet = $("<article>").addClass("tweet");
+var $tweet = $("<article>").addClass("tweet").attr("DBid",userData._id);
 const $header = $('<header>');
 const $username = $('<h2>').text(userData.user.name);
 const $avatar = $('<img>').attr('src', userData.user.avatars.small);
@@ -50,12 +55,14 @@ const $main = $('<p>').text(userData.content.text);
 const $iconsheart = $("<i>").addClass("fa").addClass("fa-heartbeat").attr("aria-hidden",true);
 const $iconsretweet = $("<i>").addClass("fa").addClass("fa-retweet").attr("aria-hidden",true);
 const $iconsflag = $("<i>").addClass("fa").addClass("fa-flag").attr("aria-hidden",true);
+const $span3 = $('<span>').addClass("likes").text(userData.numberOfLikes);
 $tweet.append($header);
 $tweet.append($main);
 $tweet.append($footer);
 // escape(userData.content.text)
 $header.append($avatar,$username, $span1);
-$footer.append($span2,$iconsheart,$iconsretweet,$iconsflag);
+$footer.append($span2, $span3,$iconsheart,$iconsretweet,$iconsflag);
+
 return $tweet;
 }
 
@@ -147,6 +154,50 @@ $('.new-tweet .counter').text('140').css('color', 'black');
       $('#text').select();
   });
 
+$("body").on('click', '.tweet .fa-heartbeat', function(event)
+    {
+      $.ajax({
+          method: 'POST',
+          url: 'tweets/likes',
+          data: {
+            tweet: $(this).parent().parent().find('p').text(),
+            likes: true,
+
+          }
+      }).then(function (res) {
+        // tell the user that the server successfully added this image to their "liked images"
+        //alert('Successfully added ' + res);
+      }).fail(function (err) {
+        console.log(err);
+        alert('failed');
+      });
+
+        $.ajax({
+        url: 'http://localhost:8080/tweets',
+        method: 'GET',
+      }).then(function (res) {
+        // tell the user that the server successfully added this image to their "liked images"
+       // console.log('Successfully added ' + res);
+        $(".articlecont").empty();
+        renderTweets(res);
+        //console.log(res)
+      }).fail(function (err) {
+        console.log(err);
+        alert('failed');
+      });
+
+
+      var $h2 = $('h2')
+      console.log($(this).parent().parent().find('p').text());
+    });
+
+
+
+
+
 });
+
+
+
 
 
