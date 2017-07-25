@@ -4,7 +4,7 @@ $( document ).ready(function() {
     var counter = $('.new-tweet .counter');
     var max = parseInt(counter.text(), 10);
 
-    $(".new-tweet").find("textarea").on('input', function(event)
+    $(".new-tweet").find("textarea").on('click', function(event)
     {
       var sentenceSize = $(this).val().length;
       $('.new-tweet .counter').css('color', 'black');
