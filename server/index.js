@@ -1,15 +1,15 @@
 "use strict";
 
 // Basic express setup:
-
+require('dotenv').config();
 const PORT          = 8080;
 const express       = require("express");
 const bodyParser    = require("body-parser");
 const app           = express();
 
 const MongoClient = require("mongodb").MongoClient;
-const MONGODB_URI = process.env.MONGODB_URI;
-require('dotenv').config();
+const MONGODB_URI = "mongodb://localhost:27017/tweeter";
+
 
 
 app.use(bodyParser.urlencoded({ extended: true }));
