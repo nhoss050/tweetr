@@ -27,7 +27,7 @@ $form.on("submit",function(event) {
     if(parseInt($('.counter').text(), 10)>=0){
       $.ajax({
           method: 'POST',
-          url: 'http://localhost:8080/tweets',
+          url: '/tweets',
           data: $(this).serialize(),
 
       }).then(function (res) {
@@ -35,11 +35,11 @@ $form.on("submit",function(event) {
         //alert('Successfully added ' + res);
       }).fail(function (err) {
         console.log(err);
-        alert('failed');
+        alert('failed 1');
       });
 //----------- Get in the listener--------------------
       $.ajax({
-        url: 'http://localhost:8080/tweets',
+        url: '/tweets',
         method: 'GET',
       }).then(function (res) {
         // tell the user that the server successfully added this image to their "liked images"
@@ -76,7 +76,7 @@ $("body").on('click', '.tweet .fa-heartbeat', function(event)
     {
       $.ajax({
           method: 'POST',
-          url: 'tweets/likes',
+          url: '/tweets/likes',
           data: {
             tweet: $(this).parent().parent().find('p').text(),
             likes: true,
@@ -92,7 +92,7 @@ $("body").on('click', '.tweet .fa-heartbeat', function(event)
       });
 
         $.ajax({
-        url: 'http://localhost:8080/tweets',
+        url: '/tweets',
         method: 'GET',
       }).then(function (res) {
         // tell the user that the server successfully added this image to their "liked images"
@@ -116,7 +116,7 @@ $("body").on('click', '.tweet .fa-heartbeat', function(event)
 function loadTweets(){
 
   $.ajax({
-        url: 'http://localhost:8080/tweets',
+        url: '/tweets',
         method: 'GET',
       }).then(function (res) {
         // tell the user that the server successfully added this image to their "liked images"
